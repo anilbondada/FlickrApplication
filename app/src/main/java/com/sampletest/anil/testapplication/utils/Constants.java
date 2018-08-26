@@ -17,6 +17,7 @@ public abstract class Constants {
     public static final String API_PARMAMS_SAFE_SEARCH = "safe_search";
     public static final String API_PARMAMS_SEARCH_TEXT = "text";
     public static final String API_PARMAMS_METHOD_URL = "method";
+    public static final String API_PARMAMS_METHOD_URL_VALUE ="flickr.photos.search";
     public static final String PAGES = "page";
 
     /*Try this call below:

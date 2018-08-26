@@ -91,7 +91,7 @@ public class FlickrImagePresenter implements IFlickrImagePresenter, IDataFetchRe
         params.put(Constants.API_FORMAT,Constants.API_FORMAT_JSON);
         params.put(Constants.API_PARMAMS_NO_JSON_CALLBACK,"1");
         params.put(Constants.API_PARMAMS_SAFE_SEARCH,"1");
-        params.put(Constants.API_PARMAMS_METHOD_URL,"flickr.photos.search");
+        params.put(Constants.API_PARMAMS_METHOD_URL,Constants.API_PARMAMS_METHOD_URL_VALUE);
         int currentPage = Utils.getCurrentPage();
         if(currentPage < Utils.getTotalNumberOfPages()) {
             params.put(Constants.PAGES, String.valueOf(currentPage + 1));

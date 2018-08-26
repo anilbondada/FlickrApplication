@@ -13,6 +13,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.internal.matchers.Any;
 import org.mockito.invocation.InvocationOnMock;
@@ -29,17 +30,23 @@ import static org.mockito.ArgumentMatchers.any;
  */
 public class FlickrImagePresenterTest {
     FlickrImagePresenter mPresenter;
+    @Mock
     IFlickrImageView mView;
     IDataHandler mDataHandler;
     List<FlickerImage> mImages;
-    private final String errorMsg = "there is failure in fetching";
+    @Mock
+    Context context;
+    private final String errorMsg = "No results found for this search";
     @Before
     public void setup(){
+        context = Mockito.mock(Context.class);
         mView = Mockito.mock(IFlickrImageView.class);
         mDataHandler = Mockito.mock(IDataHandler.class);
         mPresenter = new FlickrImagePresenter(mView);
         mPresenter.congigureDataStoreModule(mDataHandler);
         mImages = getNewImages();
+        Mockito.when(mView.getViewContext()).thenReturn(context);
+
     }
     @Test
     public void congigureDataStoreModule() throws Exception {
@@ -53,7 +60,7 @@ public class FlickrImagePresenterTest {
         Answer answer = new Answer() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                    IDataFetchResponse callback = invocation.getArgument(0);
+                    IDataFetchResponse callback = invocation.getArgument(2);
                     callback.onSuccessResponse(mImages);
                     return null;
             }
@@ -69,13 +76,13 @@ public class FlickrImagePresenterTest {
         Answer answer = new Answer() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                IDataFetchResponse callback = invocation.getArgument(0);
+                IDataFetchResponse callback = invocation.getArgument(2);
                 callback.onSuccessResponse(mImages);
                 return null;
             }
         };
-
         Mockito.doAnswer(answer).when(mDataHandler).fetchImages(any(Context.class),any(INetworkParamsDetails.class),any(IDataFetchResponse.class));
+
         mPresenter.fetchFlickrImages("test");
         Mockito.verify(mView).onImagesFetchedSuccess(mImages);
     }
@@ -85,15 +92,47 @@ public class FlickrImagePresenterTest {
         Answer answer = new Answer() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                IDataFetchResponse callback = invocation.getArgument(0);
+                IDataFetchResponse callback = invocation.getArgument(2);
                 callback.onFailedResponse(errorMsg);
+                return null;
+            }
+        };
+        Mockito.when(mView.getViewContext()).thenReturn(context);
+        Mockito.doAnswer(answer).when(mDataHandler).fetchImages(any(Context.class),any(INetworkParamsDetails.class),any(IDataFetchResponse.class));
+        mPresenter.fetchFlickrImages("test");
+        Mockito.verify(mView).onImagesFetchedFailed(errorMsg);
+    }
+
+    @Test
+    public void fetchNextImagesSuccess(){
+        Answer answer = new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                IDataFetchResponse callback = invocation.getArgument(2);
+                callback.onSuccessResponse(mImages);
                 return null;
             }
         };
 
         Mockito.doAnswer(answer).when(mDataHandler).fetchImages(any(Context.class),any(INetworkParamsDetails.class),any(IDataFetchResponse.class));
-        mPresenter.fetchFlickrImages("test");
-        Mockito.verify(mView).onImagesFetchedFailed(errorMsg);
+        mPresenter.fetchNextFlickrImages();
+        Mockito.verify(mView).onNextPagesFetchSuccess(mImages);
+    }
+
+    @Test
+    public void fetchNextImagesFailure(){
+        Answer answer = new Answer() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                IDataFetchResponse callback = invocation.getArgument(2);
+                callback.onFailedResponse(errorMsg);
+                return null;
+            }
+        };
+        Mockito.when(mView.getViewContext()).thenReturn(context);
+        Mockito.doAnswer(answer).when(mDataHandler).fetchImages(any(Context.class),any(INetworkParamsDetails.class),any(IDataFetchResponse.class));
+        mPresenter.fetchNextFlickrImages();
+        Mockito.verify(mView).onNextPagesFetchFail(errorMsg);
     }
 
     public List<FlickerImage> getNewImages() {
