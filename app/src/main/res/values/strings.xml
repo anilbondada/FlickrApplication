@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Flickr Application</string>
+    <string name="image_title">Image Title</string>
+
+    <string name="status_msg">No images to display</string>
+
+    <string name="anil_test_msg">Anil Test Application</string>
+
+    <string name="permissions_msg">Permissions required for this application</string>
+
+    <string name="no_results_found">No results found for this search</string>
+
+    <string name="no_internet_connection">Please check your internet connection and try again.</string>
+
+</resources>
