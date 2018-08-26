@@ -15,21 +15,10 @@ import com.sampletest.anil.testapplication.R;
 import com.sampletest.anil.testapplication.datastore.DataStoreFactory;
 import com.sampletest.anil.testapplication.datastore.interfaces.IDataFetchResponse;
 import com.sampletest.anil.testapplication.datastore.interfaces.IDataHandler;
-import com.sampletest.anil.testapplication.datastore.local.interfaces.IFlickrImageDataResponse;
-import com.sampletest.anil.testapplication.datastore.network.ImageDownloaderWithLRU;
-import com.sampletest.anil.testapplication.datastore.network.interfaces.IImageDataCallback;
 import com.sampletest.anil.testapplication.datastore.network.interfaces.INetworkParamsDetails;
 import com.sampletest.anil.testapplication.model.FlickerImage;
-import com.sampletest.anil.testapplication.model.Photo;
 import com.sampletest.anil.testapplication.utils.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
-
-import static com.sampletest.anil.testapplication.utils.Constants.DB_OPERATION_READ;
 
 /**
  * Created by H211060 on 8/21/2018.

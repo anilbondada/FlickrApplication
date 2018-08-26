@@ -1,7 +1,6 @@
 package com.sampletest.anil.testapplication.ui.imagelist;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +9,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.sampletest.anil.testapplication.IApplicationDataProvider;
 import com.sampletest.anil.testapplication.R;
 import com.sampletest.anil.testapplication.datastore.interfaces.IDataHandler;
-import com.sampletest.anil.testapplication.datastore.network.ImageDownloaderWithLRU;
-import com.sampletest.anil.testapplication.datastore.network.interfaces.IImageDataCallback;
 import com.sampletest.anil.testapplication.model.FlickerImage;
-import com.sampletest.anil.testapplication.utils.Utils;
 
 import java.util.List;
 
