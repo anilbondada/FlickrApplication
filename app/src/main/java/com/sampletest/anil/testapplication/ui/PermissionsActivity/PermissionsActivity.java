@@ -62,7 +62,7 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
         switch (requestCode){
             case MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE:
             {
-                mPresenter.checkIfAllPermissionsAccepted(this);
+                mPresenter.validatePermissions(this);
                 break;
             }
         }

@@ -8,4 +8,5 @@ import android.content.Context;
 
 public interface IPermissionsPresenter {
     void checkIfAllPermissionsAccepted(Context context);
+    void validatePermissions(Context context);
 }

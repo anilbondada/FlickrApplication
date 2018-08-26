@@ -27,6 +27,13 @@ public class PermissionsPresenter implements IPermissionsPresenter {
 
     }
 
+    @Override
+    public void validatePermissions(Context context) {
+        if(checkAppPermissions(context)){
+            mView.startNextActivity();
+        }
+    }
+
     private boolean checkAppPermissions(Context context){
         if(Utils.permissionsAccepted(context)){
             return true;
