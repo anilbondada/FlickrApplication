@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.sampletest.anil.testapplication.IApplicationDataProvider;
@@ -33,6 +34,7 @@ public class FlickrImagesActivity extends BaseActivity implements IFlickrImageVi
     RecyclerViewAdapter mImageRecylcerViewAdapter;
     Toolbar toolbar;
     LinearLayout linlaHeaderProgress;
+    ProgressBar loadMoreProgressBar;
     ScrollListener scrollListener;
     android.support.v7.widget.SearchView searchView;
     private static final String defaultQuery = "test";
@@ -45,6 +47,7 @@ public class FlickrImagesActivity extends BaseActivity implements IFlickrImageVi
 
     private void init(){
         linlaHeaderProgress = findViewById(R.id.linlaHeaderProgress);
+        loadMoreProgressBar = findViewById(R.id.loadMoreProgressBar);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         tv_status_msg = findViewById(R.id.status_msg_text);
@@ -60,6 +63,7 @@ public class FlickrImagesActivity extends BaseActivity implements IFlickrImageVi
                 // Triggered only when new data needs to be appended to the list
                 // Add whatever code is needed to append new items to the bottom of the list
                 Log.d(TAG, "onLoadMore: page:"+page+" totalItems:"+totalItemsCount);
+                loadMoreProgressBar.setVisibility(View.VISIBLE);
                 mPresenter.fetchNextFlickrImages();
             }
         };
@@ -87,6 +91,7 @@ public class FlickrImagesActivity extends BaseActivity implements IFlickrImageVi
 
     private void showImages() {
         linlaHeaderProgress.setVisibility(View.GONE);
+        loadMoreProgressBar.setVisibility(View.GONE);
         tv_status_msg.setVisibility(View.GONE);
         imageView.setVisibility(View.VISIBLE);
     }
@@ -96,6 +101,7 @@ public class FlickrImagesActivity extends BaseActivity implements IFlickrImageVi
     public void onImagesFetchedFailed(String errorMsg) {
         //show error msg
         linlaHeaderProgress.setVisibility(View.GONE);
+        loadMoreProgressBar.setVisibility(View.GONE);
         tv_status_msg.setVisibility(View.VISIBLE);
         tv_status_msg.setText(errorMsg);
     }
@@ -111,6 +117,7 @@ public class FlickrImagesActivity extends BaseActivity implements IFlickrImageVi
     @Override
     public void onNextPagesFetchFail(String errorMsg) {
         linlaHeaderProgress.setVisibility(View.GONE);
+        loadMoreProgressBar.setVisibility(View.GONE);
         tv_status_msg.setVisibility(View.VISIBLE);
         tv_status_msg.setText(errorMsg);
 

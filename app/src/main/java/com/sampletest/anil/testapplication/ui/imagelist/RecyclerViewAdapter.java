@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.sampletest.anil.testapplication.R;
@@ -67,13 +66,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public static class CardViewHolder extends RecyclerView.ViewHolder{
         TextView tv_image_title;
         ImageView iv_image;
-        ProgressBar progressBar;
         public CardViewHolder(View itemView) {
             super(itemView);
 
             tv_image_title = itemView.findViewById(R.id.flickr_image_title);
             iv_image = itemView.findViewById(R.id.flickr_image_id);
-            progressBar = itemView.findViewById(R.id.progressBarCard);
         }
     }
 

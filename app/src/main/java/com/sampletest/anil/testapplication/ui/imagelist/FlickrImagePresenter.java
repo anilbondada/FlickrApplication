@@ -38,7 +38,6 @@ public class FlickrImagePresenter implements IFlickrImagePresenter, IDataFetchRe
 
     public void fetchNextFlickrImages(){
         if(mDataHandler != null){
-            Utils.shutDownExecuter();
             params.put(Constants.API_PARMAMS_SEARCH_TEXT,lastSearchedQuery);
             mDataHandler.fetchImages(mView.getViewContext(), this, new IDataFetchResponse() {
                 @Override

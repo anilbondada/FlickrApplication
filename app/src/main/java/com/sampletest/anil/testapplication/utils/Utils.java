@@ -103,14 +103,4 @@ public class Utils {
         return currentPage;
     }
 
-    public static void executeOnThreadPool(Runnable r) {
-        mImageAsyncService = Executors.newCachedThreadPool();
-        mImageAsyncService.submit(r);
-    }
-
-    public static void shutDownExecuter(){
-        if(mImageAsyncService != null){
-            mImageAsyncService.shutdown();
-        }
-    }
 }

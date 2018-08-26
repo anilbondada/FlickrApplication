@@ -12,7 +12,6 @@ import android.widget.AbsListView;
  */
 
 public abstract class ScrollListener extends RecyclerView.OnScrollListener {
-    private static final String TAG = "ScrollListener";
     // The minimum amount of items to have below your current scroll position
     // before loading more.
     private int visibleThreshold = 5;
@@ -59,7 +58,6 @@ public abstract class ScrollListener extends RecyclerView.OnScrollListener {
             lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions);
         } else if (mLayoutManager instanceof GridLayoutManager) {
             lastVisibleItemPosition = ((GridLayoutManager) mLayoutManager).findLastVisibleItemPosition();
-            Log.d(TAG, "onScrolled: lastvisibleitem:"+lastVisibleItemPosition);
         } else if (mLayoutManager instanceof LinearLayoutManager) {
             lastVisibleItemPosition = ((LinearLayoutManager) mLayoutManager).findLastVisibleItemPosition();
         }
